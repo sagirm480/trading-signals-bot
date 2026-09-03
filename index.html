@@ -1,20 +1,178 @@
-📈 מערכת סיגנלים - סטטוס חי
-עודכן: 3.9.2026, 18:34:53
-סיכום
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>מערכת סיגנלים - סטטוס חי</title>
+<style>
+  :root{
+    --bg:#0f1729; --surface:#18223d; --surface-2:#212c4d; --border:#2a3660;
+    --ink:#eef1f8; --ink-dim:#9aa3c4;
+    --gold:#c9922f; --gold-lt:#e8c77e;
+    --green:#3fbf7f; --green-soft:#16301f;
+    --red:#e0685c; --red-soft:#331c19;
+    --grey:#6b7290;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; padding-bottom:40px;
+  }
+  header{
+    padding:18px 16px 14px; border-bottom:1px solid var(--border);
+    position:sticky; top:0; background:rgba(15,23,41,.92); backdrop-filter:blur(8px); z-index:10;
+  }
+  header h1{font-size:18px; margin:0 0 4px; font-weight:700;}
+  header .sub{font-size:12px; color:var(--ink-dim); font-family:ui-monospace,monospace;}
+  .wrap{max-width:640px; margin:0 auto; padding:0 14px;}
+  section{margin-top:22px;}
+  .sec-title{font-size:12px; color:var(--gold); text-transform:uppercase; letter-spacing:.05em; font-weight:700; margin:0 0 10px;}
+  .stat-row{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
+  .stat{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 8px; text-align:center;}
+  .stat .num{font-size:20px; font-weight:700; color:var(--gold-lt); font-variant-numeric:tabular-nums; direction:ltr; display:block;}
+  .stat .lbl{font-size:10px; color:var(--ink-dim); margin-top:2px; display:block;}
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:14px 16px; margin-bottom:10px;}
+  .card-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .ticker{font-size:16px; font-weight:700; font-family:ui-monospace,monospace; direction:ltr;}
+  .badge{font-size:11px; font-weight:700; padding:3px 8px; border-radius:100px;}
+  .badge.open{background:var(--green-soft); color:var(--green);}
+  .badge.win{background:var(--green-soft); color:var(--green);}
+  .badge.loss{background:var(--red-soft); color:var(--red);}
+  .row{display:flex; justify-content:space-between; font-size:13px; color:var(--ink-dim); padding:3px 0;}
+  .row b{color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums; direction:ltr;}
+  .empty{color:var(--ink-dim); font-size:13px; text-align:center; padding:24px 0;}
+  footer{text-align:center; margin-top:30px; font-size:11px; color:var(--grey);}
+  footer a{color:var(--gold); text-decoration:none;}
+  .refresh-note{font-size:11px; color:var(--ink-dim); text-align:center; margin-top:6px;}
+  .loading{text-align:center; padding:40px 0; color:var(--ink-dim); font-size:13px;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>📈 מערכת סיגנלים - סטטוס חי</h1>
+      <div class="sub" id="lastUpdated">טוען...</div>
+    </div>
+  </header>
 
-0
-פתוחות
-0
-נסגרו
--
-הצלחה
--
-R ממוצע
-פוזיציות פתוחות
+  <div class="wrap">
+    <div id="loading" class="loading">טוען נתונים...</div>
+    <div id="content" style="display:none">
 
-אין פוזיציות פתוחות כרגע
-עסקאות אחרונות
+      <section>
+        <p class="sec-title">סיכום</p>
+        <div class="stat-row">
+          <div class="stat"><span class="num" id="statOpen">-</span><span class="lbl">פתוחות</span></div>
+          <div class="stat"><span class="num" id="statClosed">-</span><span class="lbl">נסגרו</span></div>
+          <div class="stat"><span class="num" id="statWinRate">-</span><span class="lbl">הצלחה</span></div>
+          <div class="stat"><span class="num" id="statAvgR">-</span><span class="lbl">R ממוצע</span></div>
+        </div>
+      </section>
 
-עדיין אין עסקאות סגורות - זה בסדר, זו בדיוק העדות שנצברת עם הזמן
-מקור הנתונים ב-GitHub
-הדף מתעדכן אוטומטית כשהוא נפתח מחדש · אין push notifications עדיין
+      <section>
+        <p class="sec-title">פוזיציות פתוחות</p>
+        <div id="openPositions"></div>
+      </section>
+
+      <section>
+        <p class="sec-title">עסקאות אחרונות</p>
+        <div id="recentTrades"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <a href="https://github.com/sagirm480/trading-signals-bot" target="_blank">מקור הנתונים ב-GitHub</a>
+    <div class="refresh-note">הדף מתעדכן אוטומטית כשהוא נפתח מחדש · אין push notifications עדיין</div>
+  </footer>
+
+<script>
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path + '?t=' + Date.now());
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
+}
+
+function fmtR(r) {
+  const sign = r > 0 ? '+' : '';
+  return sign + r.toFixed(2);
+}
+
+function daysAgo(dateStr) {
+  const d = new Date(dateStr);
+  const diff = Math.floor((Date.now() - d.getTime()) / 86400000);
+  return diff;
+}
+
+async function main() {
+  const [positions, tradeLog] = await Promise.all([
+    loadJSON('positions.json'),
+    loadJSON('trade_log.json'),
+  ]);
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+  document.getElementById('lastUpdated').textContent = 'עודכן: ' + new Date().toLocaleString('he-IL');
+
+  // --- Open Positions ---
+  const openDiv = document.getElementById('openPositions');
+  const posEntries = positions ? Object.entries(positions) : [];
+  document.getElementById('statOpen').textContent = posEntries.length;
+
+  if (posEntries.length === 0) {
+    openDiv.innerHTML = '<div class="empty">אין פוזיציות פתוחות כרגע</div>';
+  } else {
+    openDiv.innerHTML = posEntries.map(([ticker, p]) => `
+      <div class="card">
+        <div class="card-top">
+          <span class="ticker">${ticker}</span>
+          <span class="badge open">פתוח · ${daysAgo(p.entry_date)} ימים</span>
+        </div>
+        <div class="row"><span>כניסה</span><b>$${p.entry_price}</b></div>
+        <div class="row"><span>סטופ</span><b>$${p.stop}</b></div>
+        <div class="row"><span>יעד</span><b>$${p.target}</b></div>
+        <div class="row"><span>גודל</span><b>${p.shares} מניות (~$${p.position_value})</b></div>
+      </div>
+    `).join('');
+  }
+
+  // --- Trade History + Stats ---
+  const trades = tradeLog || [];
+  const recentDiv = document.getElementById('recentTrades');
+  document.getElementById('statClosed').textContent = trades.length;
+
+  if (trades.length === 0) {
+    document.getElementById('statWinRate').textContent = '-';
+    document.getElementById('statAvgR').textContent = '-';
+    recentDiv.innerHTML = '<div class="empty">עדיין אין עסקאות סגורות - זה בסדר, זו בדיוק העדות שנצברת עם הזמן</div>';
+  } else {
+    const wins = trades.filter(t => t.r_multiple > 0).length;
+    const totalR = trades.reduce((s, t) => s + t.r_multiple, 0);
+    document.getElementById('statWinRate').textContent = Math.round(wins / trades.length * 100) + '%';
+    document.getElementById('statAvgR').textContent = fmtR(totalR / trades.length);
+
+    const recent = [...trades].reverse().slice(0, 15);
+    recentDiv.innerHTML = recent.map(t => `
+      <div class="card">
+        <div class="card-top">
+          <span class="ticker">${t.ticker}</span>
+          <span class="badge ${t.r_multiple > 0 ? 'win' : 'loss'}">${fmtR(t.r_multiple)}R</span>
+        </div>
+        <div class="row"><span>סיבה</span><b>${t.outcome === 'target' ? 'יעד' : t.outcome === 'stop' ? 'סטופ' : 'פקיעת זמן'}</b></div>
+        <div class="row"><span>${t.entry_date} → ${t.exit_date}</span><b>${t.days_held} ימים</b></div>
+        <div class="row"><span>רווח/הפסד</span><b>$${t.pnl_dollars}</b></div>
+      </div>
+    `).join('');
+  }
+}
+
+main();
+</script>
+</body>
+</html>
