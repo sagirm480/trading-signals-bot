@@ -9,5 +9,27 @@
     "shares": 1.4885,
     "position_value": 466.4,
     "risk_dollars": 20.0
+  },
+  "WDAY": {
+    "ticker": "WDAY",
+    "entry_date": "2026-09-03",
+    "entry_price": 208.87,
+    "stop": 194.2064,
+    "target": 238.1971,
+    "atr": 9.7757,
+    "shares": 1.3639,
+    "position_value": 284.88,
+    "risk_dollars": 20.0
+  },
+  "CEG": {
+    "ticker": "CEG",
+    "entry_date": "2026-09-03",
+    "entry_price": 293.325,
+    "stop": 279.288,
+    "target": 321.3991,
+    "atr": 9.358,
+    "shares": 1.4248,
+    "position_value": 417.93,
+    "risk_dollars": 20.0
   }
 }
