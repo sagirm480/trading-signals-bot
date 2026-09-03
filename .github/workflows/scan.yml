@@ -1,0 +1,53 @@
+name: Trading Signals Scan
+
+on:
+  schedule:
+    - cron: "*/15 13-21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "להריץ גם אם השוק סגור (לבדיקה ידנית)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trading-signals-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scan
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            python main.py --once --force
+          else
+            python main.py --once
+          fi
+
+      - name: Commit updated state (positions/trades/dedup) if changed
+        run: |
+          git config user.name "trading-signals-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state.json positions.json trade_log.json
+          git diff --cached --quiet || git commit -m "עדכון מצב אוטומטי - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
