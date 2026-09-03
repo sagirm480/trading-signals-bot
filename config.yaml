@@ -1,0 +1,239 @@
+# ============================================================
+# הגדרות מערכת ההתראות - ניתן לערוך בלי לגעת בקוד
+# ============================================================
+
+watchlist:
+  - NVDA
+  - AVGO
+  - SNPS
+  - TXN
+  - CRCL
+  - NOW
+  - ADBE
+  - WDAY
+  - DELL
+  - COIN
+  - HOOD
+  - PLTR
+  - MSTR
+  - BA
+  - GE
+  - AAPL
+  - NNE
+  - VRT
+  - TSLA
+  - AMZN
+  - MSFT
+  - GOOGL
+  - ANET
+  - LLY
+  - HIMS
+  - AMD
+  - NVTS
+  - OKLO
+  - SMR
+  - IONQ
+  - QBTS
+  - RGTI
+  - CEG
+  - BBAI
+  - CDNS
+  - WULF
+  - ARM
+  - UNH
+  - BMNR
+  - OPEN
+  - NBIS
+  - SOFI
+  - CRWD
+  - ZS
+  - DDOG
+  - BE
+  - MRVL
+  - MU
+  - ADPT
+  - CRWV
+
+# כל כמה שניות לבדוק את כל רשימת המעקב (בזמן שעות המסחר)
+loop_interval_seconds: 900   # 15 דקות
+
+# שעות מסחר (שוק ארה"ב, שעון ניו יורק) - מחוץ לשעות אלה הלולאה "ישנה" יותר זמן
+market_timezone: "America/New_York"
+market_open: "09:30"
+market_close: "16:00"
+idle_sleep_seconds: 1800     # שינה כשהשוק סגור (30 דקות בין בדיקות)
+
+# ============================================================
+# ניהול תיק/סיכונים - נקבע ביחד עם המשתמש ב-2026-08-08
+# ============================================================
+portfolio:
+  account_size_usd: 1000        # גודל התיק המוקדש למערכת
+  risk_per_trade_pct: 2.0       # % מהתיק לסכן בכל עסקה בודדת (= $20 בגודל תיק נוכחי)
+  max_concurrent_positions: 3   # כמה פוזיציות פתוחות בו-זמנית מקסימום
+  max_positions_per_sector: 1   # מגבלת קורלציה - כמה פוזיציות פתוחות מאותו סקטור/נושא בו-זמנית
+  fractional_shares: true       # מניח ברוקר עם מניות שבריות (התיק קטן, ברוב המניות סכום הסיכון < מחיר מניה אחת)
+
+# מיפוי סקטור/נושא לכל טיקר - לצורך מגבלת קורלציה (max_positions_per_sector).
+# מיפוי גס/ידני, לא רשמי - מטרתו למנוע 3 פוזיציות בו-זמנית בשמות מתואמים
+# (למשל 3 מניות שבבים) יותר מאשר דיוק סיווג מושלם.
+sectors:
+  NVDA: semiconductors_ai
+  AVGO: semiconductors_ai
+  SNPS: software_eda
+  TXN: semiconductors
+  CRCL: fintech_crypto
+  NOW: software_enterprise
+  ADBE: software_enterprise
+  WDAY: software_enterprise
+  DELL: hardware
+  COIN: fintech_crypto
+  HOOD: fintech_crypto
+  PLTR: software_ai
+  MSTR: fintech_crypto
+  BA: industrials
+  GE: industrials
+  AAPL: mega_cap_tech
+  NNE: nuclear_energy
+  VRT: industrials_datacenter
+  TSLA: mega_cap_tech
+  AMZN: mega_cap_tech
+  MSFT: mega_cap_tech
+  GOOGL: mega_cap_tech
+  ANET: semiconductors_networking
+  LLY: healthcare
+  HIMS: healthcare
+  AMD: semiconductors_ai
+  NVTS: semiconductors
+  OKLO: nuclear_energy
+  SMR: nuclear_energy
+  IONQ: quantum_computing
+  QBTS: quantum_computing
+  RGTI: quantum_computing
+  CEG: nuclear_energy
+  BBAI: software_ai
+  CDNS: software_eda
+  WULF: crypto_mining
+  ARM: semiconductors
+  UNH: healthcare
+  BMNR: fintech_crypto
+  OPEN: real_estate_tech
+  NBIS: software_ai_cloud
+  SOFI: fintech
+  CRWD: cybersecurity
+  ZS: cybersecurity
+  DDOG: software_enterprise
+  BE: clean_energy
+  MRVL: semiconductors
+  MU: semiconductors
+  ADPT: healthcare_biotech
+  CRWV: software_ai_cloud
+
+# הפעלה/כיבוי אותות לפי כיוון. כובה sell לפי בקטסט מ-2026-08-08: 162 עסקאות
+# מכירה, שיעור הצלחה 30.2%, R ממוצע -0.14 (נטו שלילי) - לעומת קנייה שהייתה
+# חיובית. סביר שזה נובע מכך שתקופת הבדיקה (3 שנים אחרונות) הייתה שוק עולה
+# ברוב המניות ברשימה, לא בהכרח פגם קבוע במערכת. אפשר להדליק מחדש בעתיד אחרי
+# בדיקה נוספת (תקופה/מניות אחרות) - ראה backtest_results.json.
+signals_enabled:
+  buy: true
+  sell: false
+
+# סף % (מתוך המשקל המקסימלי האפשרי) להפעלת אות
+# הערה: 60% היה בלתי אפשרי בפועל - נבדק אמפירית על 10 מניות/1700 דגימות
+# היסטוריות והציון בפועל כמעט אף פעם לא עובר 30% (כי 26 הפרמטרים ברובם
+# בלעדיים זה לזה ולא יכולים להיות פעילים בו-זמנית). הסף כאן כוייל לפרסנטיל
+# 95 בערך של הציון האמיתי - ראה backtest_results.json.
+thresholds:
+  buy: 20
+  sell: 20
+  htf: 60   # סף למסגרות זמן גבוהות (4H / שבועי) - סקאלה שונה, 4 פרמטרים בלבד, 60 כן מציאותי כאן
+
+# פרופיל נפח מעוגן (Volume Profile)
+volume_profile:
+  lookback_days: 100
+  bins: 24
+  value_area_pct: 70
+
+proximity_pct: 1.5   # טווח קרבה לתמיכה/התנגדות (%) לצורך תבניות נרות מבוססות S/R
+pivot_lookback: 25   # bars לזיהוי פיבוט (תמיכה/התנגדות + תבניות גרפיות)
+max_pivots: 10        # כמה פיבוטים אחרונים לזכור לצורך תבניות גרפיות
+
+# ============================================================
+# משקלים - זהים בברירת המחדל למשקלים באינדיקטור ב-TradingView
+# (full_indicator_6.pine), כדי ששתי המערכות ייתנו תוצאה דומה.
+# ניתן לשנות כאן בלי לגעת בקוד.
+# ============================================================
+# המשקלים הטכניים תוקנו ב-2026-08-08 לפי אבחון בקטסט על 109 עסקאות אמיתיות/
+# 3 שנים (ראה analyze_diagnostics.py + backtest_diag_3y.json):
+#  - volume_buy הורד חזק: נפח גבוה בכניסה בפועל *הזיק* (avg_r -0.06 מול +0.40
+#    בלעדיו) - כנראה נפח שיא = מיצוי/FOMO, לא צבירה מוקדמת.
+#  - ma150_cross_buy הורד: כמעט ולא ניבא הצלחה (0.125 מול 0.154 בלעדיו).
+#  - pivot_sr_buy הורד: כניסה "קרוב לתמיכה" (פיבוט בסיסי) דווקא ביצעה גרוע
+#    יותר (0.047 מול 0.182 בלעדיו) - כנראה תמיכה רועשת/שבורה, לא אמיתית.
+#  - vp_strong_buy הועלה: קרבה ל-Volume Profile (POC/VAH/VAL) כן ניבאה טוב
+#    יותר (0.200 מול 0.068 בלעדיו).
+#  - נוסף healthy_pullback: תבנית היפוך + מחיר 1-3 ATR מעל MA50 (לא צמוד,
+#    לא מתוח מדי) - הקומבינציה הכי חזקה שנמצאה (57% הצלחה, avg_r +0.71).
+# חשוב: זה כיול על סמך אותו דאטה שנבדק בו (in-sample) - לא הוכחה חיצונית,
+# רק השערה מבוססת-נתונים. דורש מעקב live להוכחה אמיתית.
+weights:
+  technical:
+    trend_ma50_buy: 10
+    trend_ma50_sell: 10
+    ma150_cross_buy: 4
+    ma150_cross_sell: 12
+    rsi_bounce: 8
+    rsi_reject: 8
+    volume_buy: 2
+    volume_sell: 8
+    pivot_sr_buy: 4
+    pivot_sr_sell: 10
+    vp_strong_buy: 20
+    vp_strong_sell: 15
+    healthy_pullback: 30
+
+  bull_candles:
+    hammer: 8
+    inverted_hammer: 6
+    bullish_engulfing: 9
+    bullish_harami: 5
+    piercing_line: 7
+    morning_star: 10
+    tweezer_bottom: 5
+    three_white_soldiers: 8
+    bull_marubozu: 6
+
+  bear_candles:
+    hanging_man: 8
+    shooting_star: 6
+    bearish_engulfing: 9
+    bearish_harami: 5
+    dark_cloud_cover: 7
+    evening_star: 10
+    tweezer_top: 5
+    three_black_crows: 8
+    bear_marubozu: 6
+
+  bull_charts:
+    double_bottom: 10
+    inverse_head_shoulders: 12
+    cup_handle: 9
+    rectangle_break_up: 7
+    ascending_triangle: 8
+    symmetrical_triangle_up: 7
+    falling_wedge: 8
+    flag_up: 7
+    pennant_up: 7
+    triple_bottom: 10
+    rounding_bottom: 6
+
+  bear_charts:
+    double_top: 10
+    head_shoulders: 12
+    rectangle_break_down: 7
+    descending_triangle: 8
+    symmetrical_triangle_down: 7
+    rising_wedge: 8
+    flag_down: 7
+    pennant_down: 7
+    triple_top: 10
+    rounding_top: 6

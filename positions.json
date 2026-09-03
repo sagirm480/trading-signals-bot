@@ -1,0 +1,13 @@
+{
+  "AAPL": {
+    "ticker": "AAPL",
+    "entry_date": "2026-08-07",
+    "entry_price": 313.33,
+    "stop": 299.894,
+    "target": 340.202,
+    "atr": 8.9573,
+    "shares": 1.4885,
+    "position_value": 466.4,
+    "risk_dollars": 20.0
+  }
+}
