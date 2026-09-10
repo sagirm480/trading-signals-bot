@@ -20,5 +20,16 @@
     "shares": 1.4248,
     "position_value": 417.93,
     "risk_dollars": 20.0
+  },
+  "NOW": {
+    "ticker": "NOW",
+    "entry_date": "2026-09-10",
+    "entry_price": 133.715,
+    "stop": 124.007,
+    "target": 153.1309,
+    "atr": 6.472,
+    "shares": 2.0602,
+    "position_value": 275.47,
+    "risk_dollars": 20.0
   }
 }
