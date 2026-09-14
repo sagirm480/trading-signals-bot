@@ -10,17 +10,6 @@
     "position_value": 466.4,
     "risk_dollars": 20.0
   },
-  "CEG": {
-    "ticker": "CEG",
-    "entry_date": "2026-09-03",
-    "entry_price": 293.325,
-    "stop": 279.288,
-    "target": 321.3991,
-    "atr": 9.358,
-    "shares": 1.4248,
-    "position_value": 417.93,
-    "risk_dollars": 20.0
-  },
   "NOW": {
     "ticker": "NOW",
     "entry_date": "2026-09-10",

@@ -10,5 +10,17 @@
     "r_multiple": -1.0,
     "pnl_dollars": -20.0,
     "days_held": 5
+  },
+  {
+    "ticker": "CEG",
+    "entry_date": "2026-09-03",
+    "exit_date": "2026-09-14",
+    "entry_price": 293.325,
+    "exit_price": 279.288,
+    "shares": 1.4248,
+    "outcome": "stop",
+    "r_multiple": -1.0,
+    "pnl_dollars": -20.0,
+    "days_held": 11
   }
 ]
