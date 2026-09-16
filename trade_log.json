@@ -22,5 +22,17 @@
     "r_multiple": -1.0,
     "pnl_dollars": -20.0,
     "days_held": 11
+  },
+  {
+    "ticker": "AAPL",
+    "entry_date": "2026-08-07",
+    "exit_date": "2026-09-16",
+    "entry_price": 313.33,
+    "exit_price": 332.93,
+    "shares": 1.4885,
+    "outcome": "timeout",
+    "r_multiple": 1.46,
+    "pnl_dollars": 29.17,
+    "days_held": 40
   }
 ]
