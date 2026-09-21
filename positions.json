@@ -10,17 +10,6 @@
     "position_value": 275.47,
     "risk_dollars": 20.0
   },
-  "ZS": {
-    "ticker": "ZS",
-    "entry_date": "2026-09-14",
-    "entry_price": 178.7898,
-    "stop": 165.16,
-    "target": 206.0494,
-    "atr": 9.0865,
-    "shares": 1.4674,
-    "position_value": 262.35,
-    "risk_dollars": 20.0
-  },
   "MSFT": {
     "ticker": "MSFT",
     "entry_date": "2026-09-16",
