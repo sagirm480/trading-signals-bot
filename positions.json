@@ -10,17 +10,6 @@
     "position_value": 275.47,
     "risk_dollars": 20.0
   },
-  "MSFT": {
-    "ticker": "MSFT",
-    "entry_date": "2026-09-16",
-    "entry_price": 489.9518,
-    "stop": 474.0036,
-    "target": 521.8483,
-    "atr": 10.6322,
-    "shares": 1.2541,
-    "position_value": 614.43,
-    "risk_dollars": 20.0
-  },
   "CDNS": {
     "ticker": "CDNS",
     "entry_date": "2026-09-30",

@@ -46,5 +46,17 @@
     "r_multiple": 2.0,
     "pnl_dollars": 40.0,
     "days_held": 7
+  },
+  {
+    "ticker": "MSFT",
+    "entry_date": "2026-09-16",
+    "exit_date": "2026-10-01",
+    "entry_price": 489.9518,
+    "exit_price": 521.8483,
+    "shares": 1.2541,
+    "outcome": "target",
+    "r_multiple": 2.0,
+    "pnl_dollars": 40.0,
+    "days_held": 15
   }
 ]
