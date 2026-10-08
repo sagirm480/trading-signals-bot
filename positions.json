@@ -20,5 +20,16 @@
     "shares": 1.2199,
     "position_value": 403.44,
     "risk_dollars": 20.0
+  },
+  "MSFT": {
+    "ticker": "MSFT",
+    "entry_date": "2026-10-08",
+    "entry_price": 521.53,
+    "stop": 504.0939,
+    "target": 556.4022,
+    "atr": 11.6241,
+    "shares": 1.147,
+    "position_value": 598.22,
+    "risk_dollars": 20.0
   }
 }
