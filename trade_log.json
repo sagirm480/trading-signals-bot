@@ -58,5 +58,17 @@
     "r_multiple": 2.0,
     "pnl_dollars": 40.0,
     "days_held": 15
+  },
+  {
+    "ticker": "NOW",
+    "entry_date": "2026-09-10",
+    "exit_date": "2026-10-16",
+    "entry_price": 133.715,
+    "exit_price": 153.1309,
+    "shares": 2.0602,
+    "outcome": "target",
+    "r_multiple": 2.0,
+    "pnl_dollars": 40.0,
+    "days_held": 36
   }
 ]
