@@ -20,5 +20,16 @@
     "shares": 1.147,
     "position_value": 598.22,
     "risk_dollars": 20.0
+  },
+  "WDAY": {
+    "ticker": "WDAY",
+    "entry_date": "2026-10-20",
+    "entry_price": 202.18,
+    "stop": 191.1636,
+    "target": 224.2127,
+    "atr": 7.3442,
+    "shares": 1.8155,
+    "position_value": 367.05,
+    "risk_dollars": 20.0
   }
 }
