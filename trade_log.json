@@ -70,5 +70,17 @@
     "r_multiple": 2.0,
     "pnl_dollars": 40.0,
     "days_held": 36
+  },
+  {
+    "ticker": "CDNS",
+    "entry_date": "2026-09-30",
+    "exit_date": "2026-10-22",
+    "entry_price": 330.71,
+    "exit_price": 314.3153,
+    "shares": 1.2199,
+    "outcome": "stop",
+    "r_multiple": -1.0,
+    "pnl_dollars": -20.0,
+    "days_held": 22
   }
 ]

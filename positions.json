@@ -1,15 +1,4 @@
 {
-  "CDNS": {
-    "ticker": "CDNS",
-    "entry_date": "2026-09-30",
-    "entry_price": 330.71,
-    "stop": 314.3153,
-    "target": 363.4993,
-    "atr": 10.9298,
-    "shares": 1.2199,
-    "position_value": 403.44,
-    "risk_dollars": 20.0
-  },
   "MSFT": {
     "ticker": "MSFT",
     "entry_date": "2026-10-08",
