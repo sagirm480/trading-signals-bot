@@ -82,5 +82,17 @@
     "r_multiple": -1.0,
     "pnl_dollars": -20.0,
     "days_held": 22
+  },
+  {
+    "ticker": "WDAY",
+    "entry_date": "2026-10-20",
+    "exit_date": "2026-10-29",
+    "entry_price": 202.18,
+    "exit_price": 191.1636,
+    "shares": 1.8155,
+    "outcome": "stop",
+    "r_multiple": -1.0,
+    "pnl_dollars": -20.0,
+    "days_held": 9
   }
 ]
