@@ -1,15 +1,4 @@
 {
-  "MSFT": {
-    "ticker": "MSFT",
-    "entry_date": "2026-10-08",
-    "entry_price": 521.53,
-    "stop": 504.0939,
-    "target": 556.4022,
-    "atr": 11.6241,
-    "shares": 1.147,
-    "position_value": 598.22,
-    "risk_dollars": 20.0
-  },
   "SNPS": {
     "ticker": "SNPS",
     "entry_date": "2026-10-27",
@@ -19,6 +8,17 @@
     "atr": 18.7762,
     "shares": 0.7101,
     "position_value": 335.63,
+    "risk_dollars": 20.0
+  },
+  "MSFT": {
+    "ticker": "MSFT",
+    "entry_date": "2026-11-04",
+    "entry_price": 558.35,
+    "stop": 536.1317,
+    "target": 602.7865,
+    "atr": 14.8122,
+    "shares": 0.9002,
+    "position_value": 502.61,
     "risk_dollars": 20.0
   }
 }
