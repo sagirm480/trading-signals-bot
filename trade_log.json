@@ -106,5 +106,29 @@
     "r_multiple": 2.0,
     "pnl_dollars": 40.0,
     "days_held": 27
+  },
+  {
+    "ticker": "SNPS",
+    "entry_date": "2026-10-27",
+    "exit_date": "2026-11-05",
+    "entry_price": 472.64,
+    "exit_price": 444.4758,
+    "shares": 0.7101,
+    "outcome": "stop",
+    "r_multiple": -1.0,
+    "pnl_dollars": -20.0,
+    "days_held": 9
+  },
+  {
+    "ticker": "MSFT",
+    "entry_date": "2026-11-04",
+    "exit_date": "2026-11-05",
+    "entry_price": 558.35,
+    "exit_price": 536.1317,
+    "shares": 0.9002,
+    "outcome": "stop",
+    "r_multiple": -1.0,
+    "pnl_dollars": -20.0,
+    "days_held": 1
   }
 ]
